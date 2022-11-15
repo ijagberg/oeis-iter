@@ -1,38 +1,6 @@
-pub struct TriangleIterator {
-    current: u128,
-}
+use super::PolygonalIterator;
 
-impl TriangleIterator {
-    pub fn new() -> Self {
-        Self { current: 0 }
-    }
-
-    pub fn start_from(n: u128) -> Self {
-        Self { current: n }
-    }
-}
-
-impl Iterator for TriangleIterator {
-    type Item = u128;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        let n = self.current;
-        let out = nth_triangle_number(n);
-        self.current += 1;
-
-        Some(out)
-    }
-}
-
-impl Default for TriangleIterator {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-fn nth_triangle_number(n: u128) -> u128 {
-    (n * (n + 1)) / 2
-}
+pub type TriangleIterator = PolygonalIterator<3>;
 
 #[cfg(test)]
 mod tests {

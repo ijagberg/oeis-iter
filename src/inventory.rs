@@ -1,5 +1,4 @@
-//! [OEIS](https://oeis.org/A342585)
-//! From this [video](https://www.youtube.com/watch?v=rBU9E-ZOZAI)
+//! [OEIS A342585](https://oeis.org/A342585)
 
 use std::collections::{hash_map::Entry, HashMap};
 

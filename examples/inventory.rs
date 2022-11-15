@@ -1,4 +1,4 @@
-use math_seq_iter::inventory::InventoryIterator;
+use oeis_iter::inventory::InventoryIterator;
 use std::env::args;
 
 fn main() {
