@@ -8,11 +8,12 @@ pub struct InventoryIterator {
 }
 
 impl InventoryIterator {
+    fn _new(current: u128, counts: HashMap<u128, u128>) -> Self {
+        Self { current, counts }
+    }
+
     pub fn new() -> Self {
-        Self {
-            current: 0,
-            counts: HashMap::new(),
-        }
+        Self::_new(0, HashMap::new())
     }
 
     fn increment_count_for(&mut self, number: u128) {
