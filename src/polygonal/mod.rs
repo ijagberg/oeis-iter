@@ -8,7 +8,7 @@ pub struct PolygonalIterator<const SIDES: u128> {
 }
 
 impl<const SIDES: u128> PolygonalIterator<SIDES> {
-    pub fn _new(n: u128) -> Self {
+    fn _new(n: u128) -> Self {
         if SIDES < 3 {
             panic!("PolygonalIterator with fewer than three sides");
         }
@@ -60,5 +60,11 @@ mod tests {
             pentagonal.take(5).collect::<Vec<_>>(),
             vec![0, 1, 5, 12, 22]
         );
+    }
+
+    #[test]
+    #[should_panic]
+    fn new_panics_test() {
+        let _iter: PolygonalIterator<2> = PolygonalIterator::new();
     }
 }
