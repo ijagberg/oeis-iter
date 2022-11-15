@@ -14,12 +14,12 @@ pub struct FibonacciIterator {
 }
 
 impl FibonacciIterator {
-    fn ctor(a: i128, b: i128) -> Self {
+    fn _new(a: i128, b: i128) -> Self {
         Self { a, b }
     }
 
     pub fn new() -> Self {
-        Self::ctor(-1, 1)
+        Self::_new(-1, 1)
     }
 }
 
