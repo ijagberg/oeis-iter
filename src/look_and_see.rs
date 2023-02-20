@@ -1,26 +1,30 @@
+use crate::Digit;
+
 pub struct LookAndSeeIterator {
-    current: Vec<u8>,
+    current: Vec<Digit>,
 }
 
 impl LookAndSeeIterator {
-    pub fn _new(current: Vec<u8>) -> Self {
-        if current.iter().any(|&d| d >= 10) {
-            panic!("only digits are supported");
-        }
+    fn construct(current: Vec<Digit>) -> Self {
         Self { current }
     }
 
     pub fn new() -> Self {
-        Self::_new(vec![1])
+        Self::construct(vec![Digit::new(1).unwrap()])
     }
 
     pub fn start_from(start: Vec<u8>) -> Self {
-        Self::_new(start)
+        let start = start
+            .into_iter()
+            .map(|i| Digit::new(i))
+            .collect::<Result<_, _>>()
+            .unwrap();
+        Self::construct(start)
     }
 
-    fn get_groups_for_current(&self) -> Vec<Vec<u8>> {
-        let mut groups: Vec<Vec<u8>> = Vec::new();
-        let mut last: Option<u8> = None;
+    fn get_groups_for_current(&self) -> Vec<Vec<Digit>> {
+        let mut groups: Vec<Vec<Digit>> = Vec::new();
+        let mut last: Option<Digit> = None;
         for &digit in &self.current {
             if last.map(|last| last != digit).unwrap_or(true) {
                 // create a new group
@@ -35,11 +39,12 @@ impl LookAndSeeIterator {
         groups
     }
 
-    fn create_new_from_groups(groups: Vec<Vec<u8>>) -> Vec<u8> {
+    fn create_new_from_groups(groups: Vec<Vec<Digit>>) -> Vec<Digit> {
         let mut numbers = Vec::new();
         for group in groups {
             let count =
                 u8::try_from(group.len()).expect(&format!("group had length {}", group.len()));
+            let count = Digit::new(count).unwrap();
             let elem = group[0];
             numbers.push(count);
             numbers.push(elem);
@@ -49,7 +54,7 @@ impl LookAndSeeIterator {
 }
 
 impl Iterator for LookAndSeeIterator {
-    type Item = Vec<u8>;
+    type Item = Vec<Digit>;
 
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.current.clone();
