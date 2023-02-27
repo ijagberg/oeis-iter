@@ -1,3 +1,4 @@
+pub mod heptagonal;
 pub mod hexagonal;
 pub mod pentagonal;
 pub mod square;
@@ -15,6 +16,10 @@ impl<const SIDES: u128> PolygonalIterator<SIDES> {
         Self { current: n }
     }
 
+    /// Create a new `PolygonalIterator`
+    ///
+    /// ## Panics
+    /// If `SIDES` is less than 3.
     pub fn new() -> Self {
         Self::_new(0)
     }
