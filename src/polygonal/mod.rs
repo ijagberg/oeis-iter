@@ -24,6 +24,14 @@ impl<const SIDES: u128> PolygonalIterator<SIDES> {
         Self::_new(0)
     }
 
+    /// Start this iterator at the `n`th element.
+    ///
+    /// ## Example
+    /// ```rust
+    /// # use oeis_iter::polygonal::*;
+    /// let fourth_fifth: Vec<u128> = PolygonalIterator::<3>::start_from(4).take(2).collect();
+    /// assert_eq!(fourth_fifth, vec![10, 15]);
+    /// ```
     pub fn start_from(n: u128) -> Self {
         Self::_new(n)
     }
